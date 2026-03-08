@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DailyEssentials – Affordable & Cute</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --jade:       #2D6A4F;
+      --jade-mid:   #40916C;
+      --jade-light: #74C69D;
+      --jade-pale:  #D8F3DC;
+      --jade-mist:  #F0FAF4;
+      --cream:      #FAFAF8;
+      --text-dark:  #1A2E22;
+      --text-mid:   #3D5A47;
+      --text-soft:  #6B8F76;
+      --white:      #FFFFFF;
+      --shadow-sm:  0 2px 12px rgba(45,106,79,.10);
+      --shadow-md:  0 8px 32px rgba(45,106,79,.14);
+      --shadow-lg:  0 20px 60px rgba(45,106,79,.18);
+      --radius-sm:  12px;
+      --radius-md:  20px;
+      --radius-lg:  32px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 5%;
+      background: rgba(250,250,248,.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(116,198,157,.18);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow-sm); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--jade-mid), var(--jade));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .logo-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem; color: var(--jade);
+      letter-spacing: -.3px;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text-mid);
+      font-size: .9rem; font-weight: 500; letter-spacing: .2px;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--jade); }
+
+    .nav-cta {
+      background: var(--jade);
+      color: var(--white) !important;
+      padding: 10px 22px; border-radius: 50px;
+      transition: background .2s, transform .2s !important;
+    }
+    .nav-cta:hover { background: var(--jade-mid) !important; transform: translateY(-1px); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--jade); border-radius: 2px; transition: .3s; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(135deg, var(--jade-mist) 0%, #e8f8ee 40%, #f5fbf7 100%);
+    }
+
+    /* decorative blob */
+    .hero-blob {
+      position: absolute; top: -80px; right: -120px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(116,198,157,.25) 0%, transparent 70%);
+      animation: blobFloat 8s ease-in-out infinite;
+    }
+    .hero-blob-2 {
+      position: absolute; bottom: -60px; left: -80px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(64,145,108,.12) 0%, transparent 70%);
+      animation: blobFloat 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .hero-content {
+      max-width: 620px; z-index: 1;
+      animation: fadeUp .9s ease both;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(45,106,79,.1); color: var(--jade);
+      padding: 6px 16px; border-radius: 50px;
+      font-size: .8rem; font-weight: 600; letter-spacing: .5px; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-badge::before { content: '✦'; font-size: .7rem; }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      line-height: 1.1; color: var(--text-dark);
+      margin-bottom: 20px;
+      letter-spacing: -.5px;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--jade-mid);
+    }
+
+    .hero p {
+      font-size: 1.05rem; color: var(--text-soft);
+      line-height: 1.7; max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero-buttons {
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--jade-mid), var(--jade));
+      color: var(--white); text-decoration: none;
+      padding: 16px 34px; border-radius: 50px;
+      font-weight: 600; font-size: .95rem;
+      box-shadow: 0 8px 24px rgba(45,106,79,.35);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(45,106,79,.4); }
+    .btn-primary .arrow { transition: transform .25s; }
+    .btn-primary:hover .arrow { transform: translateX(4px); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--jade); text-decoration: none;
+      font-weight: 600; font-size: .9rem;
+      padding: 16px 24px; border-radius: 50px;
+      border: 1.5px solid rgba(45,106,79,.25);
+      transition: background .2s, border-color .2s;
+    }
+    .btn-secondary:hover { background: var(--jade-pale); border-color: var(--jade-light); }
+
+    .hero-stats {
+      display: flex; gap: 36px; margin-top: 52px; padding-top: 32px;
+      border-top: 1px solid rgba(116,198,157,.25);
+    }
+    .stat { display: flex; flex-direction: column; gap: 4px; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem; color: var(--jade); line-height: 1;
+    }
+    .stat-label { font-size: .78rem; color: var(--text-soft); font-weight: 500; }
+
+    /* floating product cards in hero */
+    .hero-visual {
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 16px;
+      z-index: 1;
+      animation: fadeRight .9s .3s ease both;
+    }
+    .float-card {
+      background: white; border-radius: var(--radius-md);
+      padding: 16px 20px; box-shadow: var(--shadow-md);
+      display: flex; align-items: center; gap: 14px;
+      min-width: 230px;
+      animation: floatCard 4s ease-in-out infinite;
+    }
+    .float-card:nth-child(2) { animation-delay: -2s; margin-left: 40px; }
+    .float-card:nth-child(3) { animation-delay: -1s; }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .float-icon {
+      width: 50px; height: 50px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+    }
+    .float-icon.green { background: var(--jade-pale); }
+    .float-icon.mint  { background: #E0F5E9; }
+
+    .float-info { display: flex; flex-direction: column; gap: 3px; }
+    .float-name { font-size: .85rem; font-weight: 600; color: var(--text-dark); }
+    .float-price { font-size: .8rem; color: var(--jade-mid); font-weight: 700; }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 90px 5%; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--jade-mid); font-size: .78rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--jade-light); }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text-dark); line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--text-soft);
+      max-width: 480px; line-height: 1.65;
+    }
+
+    .section-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 52px; flex-wrap: wrap; gap: 20px;
+    }
+
+    /* ─── PRODUCTS ─── */
+    #products { background: var(--white); }
+
+    .category-tabs {
+      display: flex; gap: 12px; margin-bottom: 44px;
+    }
+    .tab {
+      padding: 10px 24px; border-radius: 50px;
+      font-size: .88rem; font-weight: 600; cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all .2s;
+    }
+    .tab.active {
+      background: var(--jade); color: white;
+      border-color: var(--jade);
+    }
+    .tab:not(.active) {
+      background: var(--jade-mist); color: var(--jade);
+      border-color: rgba(45,106,79,.15);
+    }
+    .tab:not(.active):hover { border-color: var(--jade-light); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(116,198,157,.12);
+      transition: transform .3s, box-shadow .3s;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-img-wrap {
+      position: relative; overflow: hidden;
+      height: 220px;
+      background: linear-gradient(135deg, var(--jade-mist), #e6f5ec);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-emoji { font-size: 80px; line-height: 1; filter: drop-shadow(0 8px 20px rgba(0,0,0,.12)); }
+    .product-badge-wrap {
+      position: absolute; top: 16px; left: 16px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .badge {
+      display: inline-block; padding: 4px 12px;
+      border-radius: 50px; font-size: .72rem; font-weight: 700;
+      letter-spacing: .3px;
+    }
+    .badge-new { background: var(--jade); color: white; }
+    .badge-popular { background: #FFB347; color: #5a3000; }
+
+    .product-body { padding: 24px; }
+    .product-category {
+      font-size: .75rem; color: var(--jade-mid);
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .product-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem; color: var(--text-dark);
+      margin-bottom: 8px; line-height: 1.3;
+    }
+    .product-desc {
+      font-size: .85rem; color: var(--text-soft);
+      line-height: 1.6; margin-bottom: 20px;
+    }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .product-price {
+      font-size: 1.4rem; font-weight: 700; color: var(--jade);
+      font-family: 'DM Serif Display', serif;
+    }
+    .btn-add {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--jade-pale); color: var(--jade);
+      border: none; border-radius: 50px;
+      padding: 10px 18px; font-size: .85rem; font-weight: 600;
+      cursor: pointer; transition: background .2s, transform .2s;
+      text-decoration: none;
+    }
+    .btn-add:hover { background: var(--jade-light); color: white; transform: scale(1.04); }
+
+    /* ─── FEATURES ─── */
+    #features { background: var(--jade-mist); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: white; border-radius: var(--radius-md);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(116,198,157,.15);
+      transition: transform .3s, box-shadow .3s;
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute;
+      bottom: -40px; right: -40px;
+      width: 120px; height: 120px; border-radius: 50%;
+      background: var(--jade-pale); opacity: .6;
+      transition: transform .4s;
+    }
+    .feature-card:hover::before { transform: scale(1.6); }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+    .feature-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: linear-gradient(135deg, var(--jade-light), var(--jade-mid));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 20px;
+    }
+    .feature-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem; color: var(--text-dark); margin-bottom: 10px;
+    }
+    .feature-desc { font-size: .85rem; color: var(--text-soft); line-height: 1.6; }
+
+    /* ─── ABOUT ─── */
+    #about {
+      background: linear-gradient(135deg, var(--jade) 0%, #1b4332 100%);
+      color: white; position: relative; overflow: hidden;
+    }
+    #about::before {
+      content: ''; position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: rgba(116,198,157,.1);
+    }
+    #about .section-label { color: var(--jade-light); }
+    #about .section-label::before { background: var(--jade-light); }
+    #about .section-title { color: white; }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .about-text p {
+      color: rgba(255,255,255,.75); line-height: 1.75;
+      font-size: 1rem; margin-bottom: 16px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-cards {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .about-card {
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-md);
+      padding: 22px 24px;
+      display: flex; align-items: center; gap: 16px;
+      transition: background .3s;
+    }
+    .about-card:hover { background: rgba(255,255,255,.15); }
+    .about-card-icon { font-size: 28px; flex-shrink: 0; }
+    .about-card-title { font-weight: 700; color: white; font-size: .95rem; margin-bottom: 4px; }
+    .about-card-desc { font-size: .82rem; color: rgba(255,255,255,.65); }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--white); }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 60px; align-items: start;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px; border-radius: var(--radius-sm);
+      background: var(--jade-mist);
+      border: 1px solid rgba(116,198,157,.2);
+    }
+    .contact-item-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: 12px; background: var(--jade);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .contact-item-title { font-weight: 700; color: var(--text-dark); font-size: .9rem; margin-bottom: 4px; }
+    .contact-item-value { font-size: .85rem; color: var(--text-soft); }
+
+    .wa-button {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: #25D366; color: white; text-decoration: none;
+      padding: 18px 32px; border-radius: 50px;
+      font-weight: 700; font-size: 1rem;
+      box-shadow: 0 8px 24px rgba(37,211,102,.35);
+      transition: transform .25s, box-shadow .25s;
+      margin-top: 8px;
+    }
+    .wa-button:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(37,211,102,.4); }
+
+    /* ─── FORM ─── */
+    .order-form {
+      background: var(--jade-mist);
+      border-radius: var(--radius-lg); padding: 36px;
+      border: 1px solid rgba(116,198,157,.2);
+    }
+    .form-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; color: var(--text-dark); margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: block; font-size: .82rem; font-weight: 600;
+      color: var(--text-mid); margin-bottom: 7px; letter-spacing: .2px;
+    }
+    input, select, textarea {
+      width: 100%; padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid rgba(116,198,157,.25);
+      background: white; color: var(--text-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .9rem; outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--jade-light);
+      box-shadow: 0 0 0 3px rgba(116,198,157,.15);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .btn-submit {
+      width: 100%; padding: 16px;
+      background: linear-gradient(135deg, var(--jade-mid), var(--jade));
+      color: white; border: none; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .95rem; font-weight: 700; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(45,106,79,.3);
+      transition: transform .25s, box-shadow .25s;
+      margin-top: 6px;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(45,106,79,.4); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--text-dark); color: rgba(255,255,255,.7);
+      padding: 48px 5%; text-align: center;
+    }
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; color: var(--jade-light); margin-bottom: 12px;
+    }
+    footer p { font-size: .85rem; line-height: 1.7; }
+    footer a { color: var(--jade-light); text-decoration: none; }
+
+    /* ─── DIVIDER ─── */
+    .wave-divider { width: 100%; overflow: hidden; line-height: 0; display: block; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translate(30px, -50%); }
+      to   { opacity: 1; transform: translate(0, -50%); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── MOBILE NAV ─── */
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 0;
+      position: fixed; top: 70px; left: 0; right: 0;
+      background: var(--white); z-index: 99;
+      border-bottom: 1px solid var(--jade-pale);
+      box-shadow: var(--shadow-md);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 16px 5%; text-decoration: none;
+      color: var(--text-mid); font-weight: 500;
+      border-bottom: 1px solid var(--jade-mist);
+      transition: background .2s;
+    }
+    .mobile-menu a:hover { background: var(--jade-mist); color: var(--jade); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .hero-visual { display: none; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 100px 5% 60px; text-align: center; }
+      .hero p, .hero-buttons { max-width: 100%; }
+      .hero-buttons { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .section-header { flex-direction: column; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 60px 5%; }
+    }
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .category-tabs { flex-wrap: wrap; }
+    }
+
+    /* scroll-top button */
+    #scrollTop {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--jade); color: white; border: none;
+      font-size: 20px; cursor: pointer; box-shadow: var(--shadow-md);
+      display: none; align-items: center; justify-content: center;
+      transition: transform .2s;
+    }
+    #scrollTop.show { display: flex; }
+    #scrollTop:hover { transform: translateY(-3px); }
+
+    /* toast */
+    .toast {
+      position: fixed; bottom: 88px; right: 28px; z-index: 300;
+      background: var(--jade); color: white;
+      padding: 12px 24px; border-radius: 50px;
+      font-size: .88rem; font-weight: 600;
+      box-shadow: var(--shadow-md);
+      transform: translateY(20px); opacity: 0;
+      transition: transform .4s, opacity .4s;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ──────────── NAV ──────────── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">🌿</div>
+    <span class="logo-text">DailyEssentials</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#features">Why Us</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Order Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="toggleMenu()">Products</a>
+  <a href="#features" onclick="toggleMenu()">Why Us</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Order Now</a>
+</div>
+
+<!-- ──────────── HERO ──────────── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-blob-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">New Arrivals Available</div>
+    <h1>Affordable<br /><em>Daily Essentials</em></h1>
+    <p>High-quality dishwashing liquid and cute phone charms at economical prices — made for students, households, and small businesses.</p>
+    <div class="hero-buttons">
+      <a href="#products" class="btn-primary">Shop Now <span class="arrow">→</span></a>
+      <a href="#about" class="btn-secondary">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">Rp 3K</span>
+        <span class="stat-label">Starting Price</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Products</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Satisfaction</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating cards -->
+  <div class="hero-visual">
+    <div class="float-card">
+      <div class="float-icon green">🧴</div>
+      <div class="float-info">
+        <span class="float-name">Dishwash 250ml</span>
+        <span class="float-price">Rp 3,000</span>
+      </div>
+    </div>
+    <div class="float-card">
+      <div class="float-icon green">🧴</div>
+      <div class="float-info">
+        <span class="float-name">Dishwash 500ml</span>
+        <span class="float-price">Rp 5,000</span>
+      </div>
+    </div>
+    <div class="float-card">
+      <div class="float-icon mint">📿</div>
+      <div class="float-info">
+        <span class="float-name">Phone Charm</span>
+        <span class="float-price">Rp 4,000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── PRODUCTS ──────────── -->
+<section id="products">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Our Products</div>
+      <h2 class="section-title">Everyday Picks,<br />Everyday Prices</h2>
+    </div>
+    <p class="section-sub">Everything you need for a clean kitchen and a stylish phone — all budget-friendly.</p>
+  </div>
+
+  <div class="category-tabs reveal">
+    <div class="tab active" onclick="filterTab(this, 'all')">All Products</div>
+    <div class="tab" onclick="filterTab(this, 'dish')">🧴 Dishwashing</div>
+    <div class="tab" onclick="filterTab(this, 'charm')">📿 Phone Charms</div>
+  </div>
+
+  <div class="products-grid" id="productsGrid">
+
+    <!-- Card 1 -->
+    <div class="product-card reveal" data-cat="dish">
+      <div class="product-img-wrap" style="background: linear-gradient(135deg,#ddf5e7,#b7e4c7);">
+        <span class="product-emoji">🧴</span>
+        <div class="product-badge-wrap">
+          <span class="badge badge-popular">Best Seller</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-category">Dishwashing Liquid</div>
+        <div class="product-name">250 ml Bottle</div>
+        <p class="product-desc">Economical dishwashing liquid suitable for daily use, effective for cleaning plates and glasses without leaving residue.</p>
+        <div class="product-footer">
+          <div class="product-price">Rp 3,000</div>
+          <a href="#contact" class="btn-add">Order ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="product-card reveal" data-cat="dish">
+      <div class="product-img-wrap" style="background: linear-gradient(135deg,#c7f9cc,#80b918);">
+        <span class="product-emoji" style="filter:drop-shadow(0 8px 20px rgba(0,0,0,.15));">🫙</span>
+        <div class="product-badge-wrap">
+          <span class="badge badge-new">Best Value</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-category">Dishwashing Liquid</div>
+        <div class="product-name">500 ml Bottle</div>
+        <p class="product-desc">Larger size for longer use, perfect for canteens, food stalls, and households with big dishwashing needs.</p>
+        <div class="product-footer">
+          <div class="product-price">Rp 5,000</div>
+          <a href="#contact" class="btn-add">Order ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="product-card reveal" data-cat="charm">
+      <div class="product-img-wrap" style="background: linear-gradient(135deg,#fde8ff,#e9c1f5);">
+        <span class="product-emoji">📿</span>
+        <div class="product-badge-wrap">
+          <span class="badge badge-new">New</span>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-category">Phone Charm</div>
+        <div class="product-name">Decorative Phone Charm</div>
+        <p class="product-desc">Cute and simple phone accessory that adds personality and style to your phone. Perfect little gift too!</p>
+        <div class="product-footer">
+          <div class="product-price">Rp 4,000</div>
+          <a href="#contact" class="btn-add">Order ✦</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ──────────── FEATURES ──────────── -->
+<section id="features">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">Made for Real Life,<br />Real Budgets</h2>
+    </div>
+    <p class="section-sub">We keep things simple, affordable, and practical — so you get the best value every time.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Affordable Prices</div>
+      <p class="feature-desc">All products are priced within reach — perfect for students, households, and small business owners on a budget.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">📦</div>
+      <div class="feature-title">Practical Packaging</div>
+      <p class="feature-desc">Compact and sturdy packaging that's easy to store, carry, and use daily without any hassle.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏠</div>
+      <div class="feature-title">Household & Business Ready</div>
+      <p class="feature-desc">Our dishwashing liquid suits both homes and small canteens or food stalls that need reliable, everyday cleaning.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">✨</div>
+      <div class="feature-title">Simple & Stylish</div>
+      <p class="feature-desc">Our phone charms bring fun personality to your device — minimal, cute, and totally on-trend for any style.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── ABOUT ──────────── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">A Little Shop for<br />Everyday Needs</h2>
+      <p>We are a small, friendly shop that believes everyone deserves quality everyday products without breaking the bank. Our mission is simple: bring affordable, useful products to students, families, and small food vendors.</p>
+      <p>From effective dishwashing liquids that keep your kitchen sparkling, to cute phone charms that let you express your personality — we've got your daily essentials covered at prices that make sense.</p>
+      <p>Whether you run a warung, manage a busy household, or just want something cute for your phone, we're here to make your day a little easier and a little brighter. 🌿</p>
+    </div>
+    <div class="about-cards reveal">
+      <div class="about-card">
+        <div class="about-card-icon">🎓</div>
+        <div>
+          <div class="about-card-title">Perfect for Students</div>
+          <div class="about-card-desc">Budget-friendly products that fit student life</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🏡</div>
+        <div>
+          <div class="about-card-title">Great for Households</div>
+          <div class="about-card-desc">Daily essentials for every home</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🍜</div>
+        <div>
+          <div class="about-card-title">Small Vendors & Canteens</div>
+          <div class="about-card-desc">Bulk-friendly options for warung & food stalls</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">💚</div>
+        <div>
+          <div class="about-card-title">Our Promise</div>
+          <div class="about-card-desc">Quality you can trust at prices you'll love</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── CONTACT ──────────── -->
+<section id="contact">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Contact & Order</div>
+      <h2 class="section-title">Ready to Order?<br />Let's Talk!</h2>
+    </div>
+    <p class="section-sub">Place your order via WhatsApp or fill in the form below. We'll get back to you quickly!</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="contact-item-icon">📱</div>
+        <div>
+          <div class="contact-item-title">WhatsApp</div>
+          <div class="contact-item-value">+62 812-3456-7890</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <div class="contact-item-title">Location</div>
+          <div class="contact-item-value">Bali, Indonesia</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">⏰</div>
+        <div>
+          <div class="contact-item-title">Available Hours</div>
+          <div class="contact-item-value">Mon – Sat, 08:00 – 20:00 WITA</div>
+        </div>
+      </div>
+      <a href="https://wa.me/6281234567890?text=Halo!%20Saya%20mau%20pesan%20produk%20dari%20DailyEssentials%20😊" class="wa-button" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order via WhatsApp
+      </a>
+    </div>
+
+    <div class="order-form reveal">
+      <div class="form-title">Send an Order 🛒</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="e.g. Budi Santoso" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone / WA</label>
+          <input type="tel" id="phone" placeholder="08xx-xxxx-xxxx" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="product">Product</label>
+        <select id="product">
+          <option value="">— Select a Product —</option>
+          <option>Dishwashing Liquid 250ml – Rp 3,000</option>
+          <option>Dishwashing Liquid 500ml – Rp 5,000</option>
+          <option>Decorative Phone Charm – Rp 4,000</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="qty">Quantity</label>
+        <input type="number" id="qty" placeholder="e.g. 2" min="1" />
+      </div>
+      <div class="form-group">
+        <label for="note">Notes (optional)</label>
+        <textarea id="note" placeholder="Delivery address, special requests, etc."></textarea>
+      </div>
+      <button class="btn-submit" onclick="submitOrder()">Send Order 🚀</button>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer>
+  <div class="footer-logo">🌿 DailyEssentials</div>
+  <p>Affordable daily products for students, households & small businesses.<br />
+  Made with 💚 in Bali, Indonesia &nbsp;·&nbsp; <a href="#contact">Contact Us</a></p>
+</footer>
+
+<!-- Scroll Top -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- Toast -->
+<div class="toast" id="toast">✓ Order sent! We'll contact you soon 😊</div>
+
+<script>
+  // ── Navbar shadow on scroll
+  const nav = document.getElementById('navbar');
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    scrollBtn.classList.toggle('show', window.scrollY > 400);
+  });
+
+  // ── Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // ── Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // ── Category filter
+  function filterTab(el, cat) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.product-card').forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+    });
+  }
+
+  // ── Form submit
+  function submitOrder() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const product = document.getElementById('product').value;
+    if (!name || !phone || !product) {
+      alert('Please fill in your name, phone number, and select a product!');
+      return;
+    }
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+    // Clear form
+    ['name','phone','qty','note'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('product').value = '';
+  }
+</script>
+</body>
+</html>
