@@ -974,21 +974,34 @@
   }
 
   // ── Form submit
-  function submitOrder() {
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const product = document.getElementById('product').value;
-    if (!name || !phone || !product) {
-      alert('Please fill in your name, phone number, and select a product!');
-      return;
-    }
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3500);
-    // Clear form
-    ['name','phone','qty','note'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('product').value = '';
+function submitOrder() {
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const product = document.getElementById('product').value;
+  const qty = document.getElementById('qty').value;
+  const note = document.getElementById('note').value;
+
+  if (!name || !phone || !product) {
+    alert('Please fill in your name, phone number, and select a product!');
+    return;
   }
+
+  const message =
+      `Halo! Saya ingin memesan produk dari Fobu-Shop 😊
+
+      Nama: ${name}
+      No HP: ${phone}
+      Produk: ${product}
+      Jumlah: ${qty}
+
+      Catatan: ${note}`;
+
+        const encodedMessage = encodeURIComponent(message);
+
+        const whatsappNumber = "6285950422512";
+
+        window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
+}
 </script>
 </body>
 </html>
