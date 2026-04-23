@@ -204,6 +204,7 @@
     }
     .float-card:nth-child(2) { animation-delay: -2s; margin-left: 40px; }
     .float-card:nth-child(3) { animation-delay: -1s; }
+    .float-card:nth-child(4) { animation-delay: -2s; margin-left: 40px; }
 
     @keyframes floatCard {
       0%, 100% { transform: translateY(0); }
