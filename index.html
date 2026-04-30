@@ -108,14 +108,102 @@
 
   <div class="category-tabs reveal">
     <div class="tab active" onclick="filterTab(this, 'all')">All Products</div>
+    <div class="tab" onclick="filterTab(this, 'cookies')">🍪 Cookies</div>
     <div class="tab" onclick="filterTab(this, 'dish')">🧴 Dishwashing</div>
     <div class="tab" onclick="filterTab(this, 'charm')">📿 Phone Charms</div>
-    <div class="tab" onclick="filterTab(this, 'cookies')">🍪 Cookies</div>
   </div>
 
   <div class="products-grid" id="productsGrid">
 
-    <!-- Card 1 -->
+    <!-- Card 1 (Cookies) -->
+    <div class="product-card reveal" data-cat="cookies">
+      <div class="product-img-wrap" style="background: linear-gradient(135deg,#fff3e0,#ffd6a5);">
+        <img src="images/cookies.jpg" class="product-img" alt="Cookies">
+          <div class="product-badge-wrap">
+          <span class="badge badge-new">New Product</span>
+          </div>
+      </div>
+      <div class="product-body">
+        <div class="product-category">Cookies</div>
+        <div class="product-name">Original Cookies
+        </div>
+        <p class="product-desc">
+          Freshly baked homemade cookies with a soft texture and rich flavor. Perfect for snacks, gifts, or selling again!
+        </p>
+        <div class="product-footer">
+          <div class="product-price">Rp 10,000</div>
+          <a href="#contact" class="btn-add">Order ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 (Cookies) -->
+    <div class="product-card reveal" data-cat="cookies">
+      <div class="product-img-wrap" style="background: linear-gradient(135deg,#fff3e0,#ffd6a5);">
+        <img src="images/cookies.jpg" class="product-img" alt="Cookies">
+          <div class="product-badge-wrap">
+          <span class="badge badge-new">New Product</span>
+          </div>
+      </div>
+      <div class="product-body">
+        <div class="product-category">Cookies</div>
+        <div class="product-name">Matcha Cookies
+        </div>
+        <p class="product-desc">
+          Delicate cookies with a soft texture and a rich matcha flavor. A unique and calming flavor experience in every bite!
+        </p>
+        <div class="product-footer">
+          <div class="product-price">Rp 15,000</div>
+          <a href="#contact" class="btn-add">Order ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 (Cookies) -->
+    <div class="product-card reveal" data-cat="cookies">
+      <div class="product-img-wrap" style="background: linear-gradient(135deg,#fff3e0,#ffd6a5);">
+        <img src="images/cookies.jpg" class="product-img" alt="Cookies">
+          <div class="product-badge-wrap">
+          <span class="badge badge-new">New Product</span>
+          </div>
+      </div>
+      <div class="product-body">
+        <div class="product-category">Cookies</div>
+        <div class="product-name">Oreo Cookies
+        </div>
+        <p class="product-desc">
+          Soft cookies packed with crunchy Oreo bits and a creamy chocolate taste. A delightful treat for any sweet craving!
+        </p>
+        <div class="product-footer">
+          <div class="product-price">Rp 14,000</div>
+          <a href="#contact" class="btn-add">Order ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 (Cookies) -->
+    <div class="product-card reveal" data-cat="cookies">
+      <div class="product-img-wrap" style="background: linear-gradient(135deg,#fff3e0,#ffd6a5);">
+        <img src="images/cookies.jpg" class="product-img" alt="Cookies">
+          <div class="product-badge-wrap">
+          <span class="badge badge-new">New Product</span>
+          </div>
+      </div>
+      <div class="product-body">
+        <div class="product-category">Cookies</div>
+        <div class="product-name">Chocolate Cookies
+        </div>
+        <p class="product-desc">
+          Freshly baked cookies with a soft, chewy texture and deep chocolate flavor. A classic favorite that everyone will love!
+        </p>
+        <div class="product-footer">
+          <div class="product-price">Rp 13,000</div>
+          <a href="#contact" class="btn-add">Order ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
     <div class="product-card reveal" data-cat="dish">
       <div class="product-img-wrap" style="background: linear-gradient(135deg,#ddf5e7,#b7e4c7);">
         <img src="images/Tugas.PKKWU1-removebg-preview.png" class="product-img" alt="Dishwash 250ml">
@@ -134,7 +222,7 @@
       </div>
     </div>
 
-    <!-- Card 2 -->
+    <!-- Card 3 -->
     <div class="product-card reveal" data-cat="dish">
       <div class="product-img-wrap" style="background: linear-gradient(135deg,#c7f9cc,#80b918);">
         <img src="images/Tugas_PKKWU-removebg-preview.png" class="product-img" alt="Dishwash 500ml">
@@ -153,12 +241,11 @@
       </div>
     </div>
 
-    <!-- Card 3 -->
+    <!-- Card 4 -->
     <div class="product-card reveal" data-cat="charm">
       <div class="product-img-wrap" style="background: linear-gradient(135deg,#fde8ff,#e9c1f5);">
         <img src="images/Tugas_PKKWU2.jpeg" class="product-img1" alt="Decorative Phone Charm">
         <div class="product-badge-wrap">
-          <span class="badge badge-new">New</span>
         </div>
       </div>
       <div class="product-body">
@@ -172,26 +259,7 @@
       </div>
     </div>
 
-    <!-- Card 4 (Cookies) -->
-    <div class="product-card reveal" data-cat="cookies">
-      <div class="product-img-wrap" style="background: linear-gradient(135deg,#fff3e0,#ffd6a5);">
-        <img src="images/cookies.jpg" class="product-img" alt="Cookies">
-          <div class="product-badge-wrap">
-          <span class="badge badge-new">New Product</span>
-          </div>
-      </div>
-      <div class="product-body">
-        <div class="product-category">Cookies</div>
-        <div class="product-name">Homemade Cookies</div>
-        <p class="product-desc">
-          Freshly baked homemade cookies with a soft texture and rich flavor. Perfect for snacks, gifts, or selling again!
-        </p>
-        <div class="product-footer">
-          <div class="product-price">Rp 10,000</div>
-          <a href="#contact" class="btn-add">Order ✦</a>
-        </div>
-      </div>
-    </div>
+    
 
   </div>
 </section>
