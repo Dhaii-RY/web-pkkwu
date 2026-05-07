@@ -29,7 +29,7 @@
       overflow-x: hidden;
     }
 
-    /* ─── NOISE TEXTURE OVERLAY ─── */
+    /* Chatgpt Punya*/
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -37,7 +37,7 @@
       pointer-events: none; z-index: 0;
     }
 
-    /* ─── NAV ─── */
+    /* Navbar */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -87,7 +87,7 @@
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .hamburger span { width: 24px; height: 2px; background: var(--jade); border-radius: 2px; transition: .3s; }
 
-    /* ─── HERO ─── */
+    /* Atasan */
     .hero {
       min-height: 100vh;
       display: flex; align-items: center;
@@ -100,7 +100,7 @@
       background: linear-gradient(135deg, var(--jade-mist) 0%, #e8f8ee 40%, #f5fbf7 100%);
     }
 
-    /* decorative blob */
+    /* Chatgpt2 */
     .hero-blob {
       position: absolute; top: -80px; right: -120px;
       width: 600px; height: 600px; border-radius: 50%;
@@ -223,7 +223,7 @@
     .float-name { font-size: .85rem; font-weight: 600; color: var(--text-dark); }
     .float-price { font-size: .8rem; color: var(--jade-mid); font-weight: 700; }
 
-    /* ─── SECTION COMMONS ─── */
+    /* Section */
     section { padding: 90px 5%; }
 
     .section-label {
@@ -251,7 +251,7 @@
       margin-bottom: 52px; flex-wrap: wrap; gap: 20px;
     }
 
-    /* ─── PRODUCTS ─── */
+    /* Produk */
     #products { background: var(--white); }
 
     .category-tabs {
@@ -344,7 +344,7 @@
     }
     .btn-add:hover { background: var(--jade-light); color: white; transform: scale(1.04); }
 
-    /* ─── FEATURES ─── */
+    /* Fitur */
     #features { background: var(--jade-mist); }
 
     .features-grid {
@@ -382,7 +382,7 @@
     }
     .feature-desc { font-size: .85rem; color: var(--text-soft); line-height: 1.6; }
 
-    /* ─── ABOUT ─── */
+    /* Tentag */
     #about {
       background: linear-gradient(135deg, var(--jade) 0%, #1b4332 100%);
       color: white; position: relative; overflow: hidden;
@@ -423,7 +423,7 @@
     .about-card-title { font-weight: 700; color: white; font-size: .95rem; margin-bottom: 4px; }
     .about-card-desc { font-size: .82rem; color: rgba(255,255,255,.65); }
 
-    /* ─── CONTACT ─── */
+    /* Kontak */
     #contact { background: var(--white); }
 
     .contact-grid {
@@ -457,7 +457,7 @@
     }
     .wa-button:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(37,211,102,.4); }
 
-    /* ─── FORM ─── */
+    /* Form order */
     .order-form {
       background: var(--jade-mist);
       border-radius: var(--radius-lg); padding: 36px;
@@ -466,6 +466,11 @@
     .form-title {
       font-family: 'DM Serif Display', serif;
       font-size: 1.5rem; color: var(--text-dark); margin-bottom: 24px;
+    }
+    .form-title1 {
+      font-family: 'Plus Jakarta Sans', serif;
+      font-size: 1.0rem; color: var(--text-soft); margin-bottom: 24px;
+      margin-top: -20px;
     }
     .form-group { margin-bottom: 18px; }
     label {
@@ -499,7 +504,7 @@
     }
     .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(45,106,79,.4); }
 
-    /* ─── FOOTER ─── */
+    /* Bawahan */
     footer {
       background: var(--text-dark); color: rgba(255,255,255,.7);
       padding: 48px 5%; text-align: center;
@@ -511,11 +516,11 @@
     footer p { font-size: .85rem; line-height: 1.7; }
     footer a { color: var(--jade-light); text-decoration: none; }
 
-    /* ─── DIVIDER ─── */
+    /* Chatgpt2 */
     .wave-divider { width: 100%; overflow: hidden; line-height: 0; display: block; }
     .wave-divider svg { display: block; width: 100%; }
 
-    /* ─── ANIMATIONS ─── */
+    /* Chatgpt3 (Animasi) */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -531,7 +536,7 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── MOBILE NAV ─── */
+    /* Navbar Buat Mobile */
     .mobile-menu {
       display: none; flex-direction: column; gap: 0;
       position: fixed; top: 70px; left: 0; right: 0;
@@ -548,7 +553,7 @@
     }
     .mobile-menu a:hover { background: var(--jade-mist); color: var(--jade); }
 
-    /* ─── RESPONSIVE ─── */
+    /* Chatgpt4 (Responsif)*/
     @media (max-width: 1024px) {
       .hero-visual { display: none; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -570,7 +575,7 @@
       .category-tabs { flex-wrap: wrap; }
     }
 
-    /* scroll-top button */
+    /* tombol buat scroll naikk */
     #scrollTop {
       position: fixed; bottom: 28px; right: 28px; z-index: 200;
       width: 48px; height: 48px; border-radius: 50%;
@@ -582,7 +587,7 @@
     #scrollTop.show { display: flex; }
     #scrollTop:hover { transform: translateY(-3px); }
 
-    /* toast */
+    /* ini toast kata chatgpt */
     .toast {
       position: fixed; bottom: 88px; right: 28px; z-index: 300;
       background: var(--jade); color: white;
